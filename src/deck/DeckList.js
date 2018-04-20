@@ -1,90 +1,55 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { getDecks } from './reducer';
-import { actionGetDecks, actionLoading } from './action'
+import { actionGetDecks, actionLoading } from './action';
 
-class DeckList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.getDecks = this.getDecks.bind(this);
-    this.reload = this.reload.bind(this);
-  }
-
-  reload(loading) {
-    const dispatch = this.props.dispatch;
-    const actLoading = actionLoading(loading);
-    dispatch(actLoading);
-  }
-
-  getDecks() {
-    const dispatch = this.props.dispatch;
-
-    this.reload(true);
-    const decks = {
-      React: {
-        title: 'React',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      JavaScript: {
-        title: 'JavaScript',
-        questions: [
-          {
-            question: 'What is a closure?',
-            answer: 'The combination of a function and the lexical environment within which that function was declared.'
-          }
-        ]
-      }
-    };
-
-    const action = actionGetDecks(decks);
-    dispatch(action);
-    this.reload(false, dispatch);
-  }
-
-  componentDidMount() {
-    console.log('getting decks component did mount');
-    this.getDecks();
-  }
-
-  render() {
-    const { decks } = this.props;
-    const keys = Object.keys(decks);
-
-    return (
-      <View style={styles.container}>
-        {keys.map(key => <Text key={key}>{decks[key].title} </Text>)}
-      </View>
-    )
-  }
+const reload = (loading) => {
+  const dispatch = this.props.dispatch;
+  const actLoading = actionLoading(loading);
+  dispatch(actLoading);
 }
+
+const getDecks = () => {
+  reload(false);
+  return this.props.decks;
+}
+
+const DeckList = props => (
+  <TouchableHighlight onPress={() => { }}>
+    <View style={styles.container}>
+      {Object.keys(props.decks).map((key) => {
+        return (
+          <View style={styles.box} key={key + 'view'}>
+            <Text style={styles.center} key={key + 'title'}>{decks[key].title} </Text>
+            <Text style={styles.center} key={key + 'cards'}>{decks[key].questions.length} cards</Text>
+          </View>);
+      }
+      )}
+    </View>
+  </TouchableHighlight>
+);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10
+    margin: 10,
+    marginTop: 25
   },
   box: {
     height: 50,
-    width: 50,
+    width: 200,
     backgroundColor: '#e76e63',
     margin: 10,
+  },
+  center: {
+    textAlign: 'center',
   }
 })
 
 function mapStateToProps(state) {
   return {
-    decks: state.decks
+    decks: getDecks(),
+    loading: state.loading
   };
 }
 
