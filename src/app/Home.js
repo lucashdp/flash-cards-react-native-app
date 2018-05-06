@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import DeckList from '../deck/DeckList';
 
 class Home extends Component {
@@ -12,7 +12,7 @@ class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <DeckList />
+                <DeckList navigation={this.props.navigation} />
             </View>
         );
     }

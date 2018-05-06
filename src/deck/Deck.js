@@ -3,14 +3,20 @@ import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-na
 import { connect } from 'react-redux';
 import { actionGetDecks, actionLoading } from './action'
 
-export default class Deck extends Component {
+class Deck extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.state.params.title
+    };
+  }
 
   render() {
-    console.log('[DECK] RENDER')
+    console.log('[DECK] RENDER');
+    console.log('props: ' + JSON.stringify(this.props));
 
     return (
       <View style={styles.container}>
-            <Text style={styles.center} key={key+'title'}>teste</Text>
+        <Text style={styles.center} key={'title'}>teste</Text>
       </View>
     )
   }
@@ -32,3 +38,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 })
+
+function mapStateToProps(state, { navigation }) {
+
+  return {
+    title: navigation.state.params.title
+  }
+}
+
+export default connect(mapStateToProps)(Deck);

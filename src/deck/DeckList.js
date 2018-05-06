@@ -28,7 +28,10 @@ class DeckList extends Component {
           this.props.decks.map((key) => {
             console.log('key ' + JSON.stringify(key))
             return (
-              <TouchableHighlight onPress={() => { }} key={key.id + 'touchable'}>
+              <TouchableHighlight onPress={() => {  
+                this.props.navigation.navigate('Deck', { title: key.title }) 
+              }} 
+              key={key.id + 'touchable'}>
                 <View style={styles.box} key={key.id + 'view'}>
                   <Text style={styles.center} key={key.id + 'title'}>{key.title} </Text>
                   <Text style={styles.center} key={key.id + 'cards'}>{key.questions.length} cards</Text>
