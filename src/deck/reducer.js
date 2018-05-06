@@ -1,9 +1,11 @@
-import { GET_DECKS, LOADING } from './action'
+import { SET_DECKS, LOADING } from './action'
+import { getStorageDecks } from '../../utils/api';
 
 const initialState =
     {
         decks: {
             React: {
+                id: 1,
                 title: 'React',
                 questions: [
                     {
@@ -17,6 +19,7 @@ const initialState =
                 ]
             },
             JavaScript: {
+                id: 2,
                 title: 'JavaScript',
                 questions: [
                     {
@@ -33,7 +36,7 @@ export default function decks(state = initialState, action) {
     const { decks } = action;
 
     switch (action.type) {
-        case GET_DECKS:
+        case SET_DECKS:
             console.log('[REDUCER-DECKS] Getting Decks');
             return {
                 ...state,
@@ -49,4 +52,14 @@ export default function decks(state = initialState, action) {
         default:
             return initialState
     }
+}
+
+export function getDecks(state) {
+    console.log('entrou mapStateToProps');
+    const deckKeys = Object.keys(state.decks);
+    console.log('deckKeys ' + JSON.stringify(deckKeys));
+    const decks = deckKeys.map(key => state.decks[key]);
+    console.log('decks ' + JSON.stringify(decks));
+
+    return decks;
 }

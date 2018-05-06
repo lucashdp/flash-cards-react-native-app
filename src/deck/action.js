@@ -1,9 +1,9 @@
-export const GET_DECKS = 'GET_DECKS';
+export const SET_DECKS = 'SET_DECKS';
 export const LOADING = 'LOADING';
 
-export function actionGetDecks(decks) {
+export function actionSetDecks(decks) {
   return {
-    type: GET_DECKS,
+    type: SET_DECKS,
     decks
   }
 }
