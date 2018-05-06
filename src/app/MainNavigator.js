@@ -2,13 +2,15 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import Deck from '../deck/Deck';
-import DeckList from '../deck/DeckList';
+import Home from './Home';
 
-export const MainNavigator = StackNavigator({
+const MainNavigator = StackNavigator({
   Home: {
-    screen: DeckList,
+    screen: Home,
   },
   Deck: {
     screen: Deck
   }
 });
+
+export default MainNavigator;
