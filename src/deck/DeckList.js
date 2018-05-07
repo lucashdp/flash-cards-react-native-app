@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
+import { 
+  Container,
+  Header,
+  Content,
+  List,
+  ListItem,
+  Thumbnail,
+  Text,
+  Body,
+  Left,
+  Right,
+  Title,
+  Button,
+  Icon
+} from 'native-base';
 import { connect } from 'react-redux';
 import { actionSetDecks, actionLoading } from './action';
 import { getStorageDecks } from '../../utils/api';
 import { getDecks } from './reducer';
 
 class DeckList extends Component {
+
   componentDidMount() {
     getStorageDecks()
       .then((decks) => {
@@ -15,52 +30,47 @@ class DeckList extends Component {
       })
   }
 
+  onPress = (key) => {
+    console.log('entrou list item click')
+    this.props.navigation.navigate('Deck', { deck: key })
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        {
-          console.log('entrou TouchableHighlight')
-        }
-        {
-          console.log('this.props.decks ' + JSON.stringify(this.props.decks))
-        }
-        {
-          this.props.decks.map((key) => {
-            console.log('key ' + JSON.stringify(key))
-            return (
-              <TouchableHighlight onPress={() => {  
-                this.props.navigation.navigate('Deck', { title: key.title }) 
-              }} 
-              key={key.id + 'touchable'}>
-                <View style={styles.box} key={key.id + 'view'}>
-                  <Text style={styles.center} key={key.id + 'title'}>{key.title} </Text>
-                  <Text style={styles.center} key={key.id + 'cards'}>{key.questions.length} cards</Text>
-                </View>
-              </TouchableHighlight>
-            );
+      <Content>
+        <Header>
+          <Left>
+          </Left>
+          <Body>
+            <Title>Decks</Title>
+          </Body>
+          <Right>
+          </Right>
+        </Header>
+        <List>
+          {
+            console.log('this.props.decks ' + JSON.stringify(this.props.decks))
           }
-          )}
-      </View>
+          {
+            this.props.decks.map((key) => {
+              console.log('key ' + JSON.stringify(key))
+              return (
+                <ListItem key={key.id} button={true}
+                  onPress={() => { this.onPress(key) }}>
+                  <Thumbnail square size={80} source={{ uri: 'https://cdn.notonthehighstreet.com/system/product_images/images/001/330/301/original_love-beards-greetings-card.jpg' }} />
+                  <Body>
+                    <Text>{key.title}</Text>
+                    <Text note>{key.questions.length} cards</Text>
+                  </Body>
+                </ListItem>
+              );
+            }
+            )}
+        </List>
+      </Content>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 10,
-    marginTop: 25
-  },
-  box: {
-    height: 50,
-    width: 200,
-    backgroundColor: '#e76e63',
-    margin: 10,
-  },
-  center: {
-    textAlign: 'center',
-  }
-});
 
 function mapStateToProps(state) {
   return {

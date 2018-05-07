@@ -10,7 +10,13 @@ const MainNavigator = StackNavigator({
   },
   Deck: {
     screen: Deck
-  }
-});
+  },
+},
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
+  });
 
 export default MainNavigator;

@@ -1,30 +1,20 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Left, Right, Title } from 'native-base';
 import DeckList from '../deck/DeckList';
+import { StatusBar } from 'native-base';
 
 class Home extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: 'Decks'
-        };
-    }
+    static navigationOptions = {
+        headerMode: 'none'
+    };
 
     render() {
         return (
-            <View style={styles.container}>
+            <Container>
                 <DeckList navigation={this.props.navigation} />
-            </View>
+            </Container>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 export default Home;
