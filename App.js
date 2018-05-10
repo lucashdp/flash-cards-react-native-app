@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
 import Expo from "expo";
-import { StatusBar } from 'native-base';
+import { StatusBar } from 'react-native';
 
 const store = createStore(reducer);
 
@@ -25,6 +25,11 @@ export default class App extends React.Component {
       Ionicons: require("native-base/Fonts/Ionicons.ttf")
     });
     this.setState({ isReady: true });
+  }
+
+  componentDidMount() {
+    StatusBar.setHidden(true);    
+    console.disableYellowBox = true;
   }
 
   render() {
