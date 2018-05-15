@@ -24,14 +24,16 @@ import {
 import { actionGetDecks, actionLoading } from './action'
 
 class Deck extends Component {
+
+  startQuiz = (deck) => {
+    console.log('entrou no start quiz')
+    console.log('deck: '+JSON.stringify(deck))
+    this.props.navigation.navigate('DeckQuiz', { deck })
+  }
+
   render() {
     console.log('[DECK] RENDER');
     console.log('props: ' + JSON.stringify(this.props));
-
-    const card = {
-      text: 'Card',
-      name: 'One'
-    };
 
     return (
       <Container>
@@ -68,7 +70,7 @@ class Deck extends Component {
                 </Button>
               </Left>
               <Right>
-                <Button dark>
+                <Button dark onPress={() => { this.startQuiz(this.props.deck) }}>
                   <Icon name="play" />
                   <Text>Start Quiz</Text>
                 </Button>
