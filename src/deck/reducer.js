@@ -1,4 +1,4 @@
-import { SET_DECKS, LOADING } from './action'
+import { SET_DECKS, LOADING, SET_ANSWER } from './action'
 import { getStorageDecks } from '../../utils/api';
 
 const initialState =
@@ -10,11 +10,11 @@ const initialState =
                 questions: [
                     {
                         question: 'Does React Native work with Android?',
-                        answer: true
+                        answer: 'YES !!'
                     },
                     {
                         question: 'Can you make Ajax requests with React?',
-                        answer: true
+                        answer: 'YES !!'
                     }
                 ]
             },
@@ -24,12 +24,14 @@ const initialState =
                 questions: [
                     {
                         question: 'Javascript is just a frontend language?',
-                        answer: false
+                        answer: 'NO !!'
                     }
                 ]
             }
         },
-        loading: true
+        loading: true,
+        progress: 0,
+        points: 0
     };
 
 export default function decks(state = initialState, action) {
@@ -49,9 +51,25 @@ export default function decks(state = initialState, action) {
                 ...state,
                 loading
             }
+        case SET_ANSWER:
+            console.log('[REDUCER-DECKS] SET ANSWER');
+            const { answer, deck } = action;
+            return {
+                ...state,
+                points: (answer ? state.points + 1 : state.points),
+                progress: (answer ? GetProgress(deck, state.progress) : state.progress)
+            }
         default:
             return initialState
     }
+}
+
+function GetProgress(deck, progress) {
+    let percent = 100 / deck.questions.length;
+    percent += progress;
+    console.log('percent: ' + percent);
+
+    return percent;
 }
 
 export function getDecks(state) {
