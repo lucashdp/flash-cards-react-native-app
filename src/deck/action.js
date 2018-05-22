@@ -1,6 +1,7 @@
 export const SET_DECKS = 'SET_DECKS';
 export const LOADING = 'LOADING';
 export const SET_ANSWER = 'SET_ANSWER';
+export const START_QUIZ = 'START_QUIZ';
 
 export function actionSetDecks(decks) {
   return {
@@ -16,10 +17,18 @@ export function actionLoading(loading) {
   }
 }
 
-export function actionSetAnswer(answer, deck) {
+export function actionSetAnswer(answer, deck, question) {
   return {
     type: SET_ANSWER,
     answer,
+    deck,
+    question
+  }
+}
+
+export function actionStartQuiz(deck) {
+  return {
+    type: START_QUIZ,
     deck
   }
 }

@@ -21,14 +21,21 @@ import {
   CardItem
 } from 'native-base';
 
-import { actionGetDecks, actionLoading } from './action'
+import { actionGetDecks, actionLoading, actionStartQuiz } from './action'
 
 class Deck extends Component {
 
   startQuiz = (deck) => {
     console.log('entrou no start quiz')
-    console.log('deck: '+JSON.stringify(deck))
+    console.log('deck: ' + JSON.stringify(deck))
+    this.props.dispatch(actionStartQuiz(this.props.deck));
     this.props.navigation.navigate('DeckQuiz', { deck })
+  }
+  
+  newCard = (deck) => {
+    console.log('entrou no new Card')
+    console.log('deck: ' + JSON.stringify(deck))
+    this.props.navigation.navigate('DeckNewCard', { deck })
   }
 
   render() {
@@ -64,7 +71,7 @@ class Deck extends Component {
             </CardItem>
             <CardItem>
               <Left>
-                <Button primary>
+                <Button primary onPress={() => { this.newCard(this.props.deck) }}>
                   <Icon name="add" />
                   <Text>Add Card</Text>
                 </Button>
