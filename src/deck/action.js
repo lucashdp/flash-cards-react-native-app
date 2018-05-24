@@ -2,6 +2,7 @@ export const SET_DECKS = 'SET_DECKS';
 export const LOADING = 'LOADING';
 export const SET_ANSWER = 'SET_ANSWER';
 export const START_QUIZ = 'START_QUIZ';
+export const SAVE_CARD = 'SAVE_CARD';
 
 export function actionSetDecks(decks) {
   return {
@@ -30,5 +31,13 @@ export function actionStartQuiz(deck) {
   return {
     type: START_QUIZ,
     deck
+  }
+}
+
+export function actionSaveCard(deck, card) {
+  return {
+    type: SAVE_CARD,
+    deck,
+    card
   }
 }

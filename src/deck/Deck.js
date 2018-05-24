@@ -31,7 +31,7 @@ class Deck extends Component {
     this.props.dispatch(actionStartQuiz(this.props.deck));
     this.props.navigation.navigate('DeckQuiz', { deck })
   }
-  
+
   newCard = (deck) => {
     console.log('entrou no new Card')
     console.log('deck: ' + JSON.stringify(deck))
@@ -46,7 +46,7 @@ class Deck extends Component {
       <Container>
         <Header>
           <Left>
-            <Button transparent onPress={() => { this.props.navigation.goBack() }}>
+            <Button transparent onPress={() => { this.props.navigation.navigate('Home') }}>
               <Icon name='arrow-back' />
             </Button>
           </Left>

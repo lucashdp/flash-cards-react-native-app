@@ -1,4 +1,4 @@
-import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ } from './action'
+import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD } from './action'
 import { getStorageDecks } from '../../utils/api';
 
 const initialState =
@@ -19,7 +19,7 @@ const initialState =
                         answered: false
                     }
                 ],
-                progress: 0,
+                progress: 0.00,
                 points: 0
             },
             JavaScript: {
@@ -32,7 +32,7 @@ const initialState =
                         answered: false
                     }
                 ],
-                progress: 0,
+                progress: 0.00,
                 points: 0
             }
         },
@@ -41,7 +41,10 @@ const initialState =
 
 export default function decks(state = initialState, action) {
 
-    const { decks, deck, answer, question, loading } = action;
+    const { decks, deck, answer, question, loading, card } = action;
+    let decksMap = getDecks(state);
+    console.log('decksMap: ' + JSON.stringify(decksMap));
+
     switch (action.type) {
         case SET_DECKS:
             console.log('[REDUCER-DECKS] Getting Decks');
@@ -57,13 +60,12 @@ export default function decks(state = initialState, action) {
             }
         case START_QUIZ:
             console.log('[REDUCER-DECKS] Starting quiz');
-            let decksMap1 = getDecks(state);
-            console.log('decksMap1: ' + JSON.stringify(decksMap1));
+            console.log('deck:' + JSON.stringify(deck));
 
-            decksMap1.map((dk) => {
+            decksMap.map((dk) => {
                 if (dk.id === deck.id) {
                     dk.points = 0;
-                    dk.progress = 0;
+                    dk.progress = 0.00;
                 }
                 console.log('dk: ' + JSON.stringify(dk));
                 dk.questions.map((qt) => {
@@ -72,19 +74,20 @@ export default function decks(state = initialState, action) {
                 })
             });
 
+            console.log('state.decks:' + JSON.stringify(state.decks));
+
             return {
                 ...state,
-                decks: decksMap1
+                decks: decksMap
             }
         case SET_ANSWER:
             console.log('[REDUCER-DECKS] SET ANSWER');
-            let decksMap = getDecks(state);
-            console.log('decksMap: ' + JSON.stringify(decksMap));
 
             decksMap.map((dk) => {
                 if (dk.id === deck.id) {
                     dk.points = (answer ? dk.points + 1 : dk.points);
-                    dk.progress = (answer ? GetProgress(dk, dk.progress) : dk.progress);
+                    const num = (answer ? GetProgress(dk, dk.progress) : dk.progress);
+                    dk.progress = Math.round(num * 100) / 100;
                 }
                 console.log('dk: ' + JSON.stringify(dk));
                 dk.questions.map((qt) => {
@@ -94,6 +97,18 @@ export default function decks(state = initialState, action) {
                 })
             });
 
+            return {
+                ...state,
+                decks: decksMap
+            }
+        case SAVE_CARD:
+            console.log('[REDUCER-DECKS] Saving');
+
+            decksMap.map((dk) => {
+                if (dk.id === deck.id) {
+                    dk.questions.push(card);
+                }
+            });
             return {
                 ...state,
                 decks: decksMap

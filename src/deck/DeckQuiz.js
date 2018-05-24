@@ -48,7 +48,7 @@ class DeckQuiz extends Component {
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => { this.props.navigation.goBack() }}>
+                        <Button transparent onPress={() => { this.props.navigation.navigate('Deck', { deck: this.props.deck }) }}>
                             <Icon name='arrow-back' />
                         </Button>
                     </Left>
