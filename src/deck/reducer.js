@@ -1,4 +1,4 @@
-import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD } from './action'
+import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD, SAVE_DECK } from './action'
 import { getStorageDecks } from '../../utils/api';
 
 const initialState =
@@ -36,7 +36,8 @@ const initialState =
                 points: 0
             }
         },
-        loading: false
+        loading: false,
+        lastId: 2
     };
 
 export default function decks(state = initialState, action) {
@@ -102,7 +103,7 @@ export default function decks(state = initialState, action) {
                 decks: decksMap
             }
         case SAVE_CARD:
-            console.log('[REDUCER-DECKS] Saving');
+            console.log('[REDUCER-DECKS] Saving card');
 
             decksMap.map((dk) => {
                 if (dk.id === deck.id) {
@@ -112,6 +113,16 @@ export default function decks(state = initialState, action) {
             return {
                 ...state,
                 decks: decksMap
+            }
+        case SAVE_DECK:
+            console.log('[REDUCER-DECKS] Saving deck');
+
+            decksMap.push(deck);
+
+            return {
+                ...state,
+                decks: decksMap,
+                lastId: state.lastId+1
             }
         default:
             return initialState
