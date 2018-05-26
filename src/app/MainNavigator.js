@@ -3,7 +3,7 @@ import { StackNavigator } from 'react-navigation';
 
 import Deck from '../deck/Deck';
 import DeckQuiz from '../deck/DeckQuiz';
-import DeckNewCard from '../deck/DeckNewCard';
+import NewCard from '../card/NewCard';
 import Home from './Home';
 
 const MainNavigator = StackNavigator({
@@ -16,8 +16,8 @@ const MainNavigator = StackNavigator({
   DeckQuiz: {
     screen: DeckQuiz
   },
-  DeckNewCard: {
-    screen: DeckNewCard
+  NewCard: {
+    screen: NewCard
   },
 },
   {

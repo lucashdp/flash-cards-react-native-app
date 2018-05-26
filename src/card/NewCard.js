@@ -19,9 +19,9 @@ import {
     FooterTab
 } from 'native-base';
 
-import { actionSaveCard } from './action';
+import { actionSaveCard } from '../deck/action';
 
-class DeckNewCard extends Component {
+class NewCard extends Component {
     constructor(props) {
         super(props)
 
@@ -95,4 +95,4 @@ function mapStateToProps(state, { navigation }) {
     }
 }
 
-export default connect(mapStateToProps)(DeckNewCard);
+export default connect(mapStateToProps)(NewCard);

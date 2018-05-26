@@ -35,7 +35,7 @@ class Deck extends Component {
   newCard = (deck) => {
     console.log('entrou no new Card')
     console.log('deck: ' + JSON.stringify(deck))
-    this.props.navigation.navigate('DeckNewCard', { deck })
+    this.props.navigation.navigate('NewCard', { deck })
   }
 
   render() {

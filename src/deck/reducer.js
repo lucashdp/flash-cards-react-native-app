@@ -36,7 +36,7 @@ const initialState =
                 points: 0
             }
         },
-        loading: true
+        loading: false
     };
 
 export default function decks(state = initialState, action) {
@@ -86,7 +86,7 @@ export default function decks(state = initialState, action) {
             decksMap.map((dk) => {
                 if (dk.id === deck.id) {
                     dk.points = (answer ? dk.points + 1 : dk.points);
-                    const num = (answer ? GetProgress(dk, dk.progress) : dk.progress);
+                    const num = GetProgress(dk, dk.progress);
                     dk.progress = Math.round(num * 100) / 100;
                 }
                 console.log('dk: ' + JSON.stringify(dk));
