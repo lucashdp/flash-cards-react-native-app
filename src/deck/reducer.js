@@ -1,5 +1,6 @@
-import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD, SAVE_DECK } from './action'
-import { getStorageDecks } from '../../utils/api';
+import { GET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD, SAVE_DECK } from './action'
+import { setInitialState } from '../../utils/setInitialState';
+import { setStateStorage } from '../../utils/api';
 
 const initialState =
     {
@@ -41,14 +42,15 @@ const initialState =
     };
 
 export default function decks(state = initialState, action) {
-
     const { decks, deck, answer, question, loading, card } = action;
+    console.log('state reducer: ' + JSON.stringify(state));
     let decksMap = getDecks(state);
     console.log('decksMap: ' + JSON.stringify(decksMap));
 
     switch (action.type) {
-        case SET_DECKS:
+        case GET_DECKS:
             console.log('[REDUCER-DECKS] Getting Decks');
+            debugger
             return {
                 ...state,
                 decks
@@ -110,6 +112,12 @@ export default function decks(state = initialState, action) {
                     dk.questions.push(card);
                 }
             });
+
+            setStateStorage({
+                ...state,
+                decks: decksMap
+            });
+
             return {
                 ...state,
                 decks: decksMap
@@ -119,13 +127,19 @@ export default function decks(state = initialState, action) {
 
             decksMap.push(deck);
 
+            setStateStorage({
+                ...state,
+                decks: decksMap,
+                lastId: state.lastId + 1
+            });
+
             return {
                 ...state,
                 decks: decksMap,
-                lastId: state.lastId+1
+                lastId: state.lastId + 1
             }
         default:
-            return initialState
+            return state
     }
 }
 
@@ -138,6 +152,7 @@ function GetProgress(deck, progress) {
 }
 
 export function getDecks(state) {
+    debugger
     console.log('entrou mapStateToProps');
     console.log('state.decks: ' + JSON.stringify(state));
     const deckKeys = Object.keys(state.decks);

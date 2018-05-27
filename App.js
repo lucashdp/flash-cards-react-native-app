@@ -8,6 +8,8 @@ import thunk from 'redux-thunk';
 import { StackNavigator } from 'react-navigation';
 import Expo from "expo";
 import { StatusBar } from 'react-native';
+import { actionSetDecks, actionLoading } from './src/deck/action';
+import { setInitialState } from './utils/setInitialState';
 
 const store = createStore(reducer);
 
@@ -28,8 +30,14 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    StatusBar.setHidden(true);    
+    StatusBar.setHidden(true);
     console.disableYellowBox = true;
+    setInitialState()
+      .then((decks) => {
+        console.log('getDecks ' + JSON.stringify(decks));
+        if (decks !== undefined && decks !== null)
+          this.props.dispatch(actionSetDecks(decks))
+      })
   }
 
   render() {
@@ -39,7 +47,7 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <MainNavigator/>
+        <MainNavigator />
       </Provider>
     );
   }

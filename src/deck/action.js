@@ -1,4 +1,4 @@
-export const SET_DECKS = 'SET_DECKS';
+export const GET_DECKS = 'GET_DECKS';
 export const LOADING = 'LOADING';
 export const SET_ANSWER = 'SET_ANSWER';
 export const START_QUIZ = 'START_QUIZ';
@@ -7,7 +7,7 @@ export const SAVE_DECK = 'SAVE_DECK';
 
 export function actionSetDecks(decks) {
   return {
-    type: SET_DECKS,
+    type: GET_DECKS,
     decks
   }
 }
