@@ -76,12 +76,18 @@ class Deck extends Component {
                   <Text>Add Card</Text>
                 </Button>
               </Left>
-              <Right>
-                <Button dark onPress={() => { this.startQuiz(this.props.deck) }}>
-                  <Icon name="play" />
-                  <Text>Start Quiz</Text>
-                </Button>
-              </Right>
+              {
+                (this.props.deck.questions.length > 0) ?
+                  <Right>
+                    <Button dark onPress={() => { this.startQuiz(this.props.deck) }}>
+                      <Icon name="play" />
+                      <Text>Start Quiz</Text>
+                    </Button>
+                  </Right>
+                  :
+                  <Right>
+                  </Right>
+              }
             </CardItem>
           </Card>
         </Content>

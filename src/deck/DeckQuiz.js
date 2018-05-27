@@ -44,7 +44,7 @@ class DeckQuiz extends Component {
                     </Right>
                 </Header>
                 <View>
-                    <DeckCard deck={this.props.deck}/>
+                    <DeckCard deck={this.props.deck} loading={this.props.loading}/>
                 </View>
             </Container>
         )
@@ -54,7 +54,8 @@ class DeckQuiz extends Component {
 function mapStateToProps(state, { navigation }) {
     return {
         decks: getDecks(state),
-        deck: navigation.state.params.deck
+        deck: navigation.state.params.deck,        
+        loading: state.loading
     }
 }
 

@@ -27,7 +27,7 @@ class NewDeck extends Component {
 
         this.state = {
             newDeck: {
-                id: this.props.lastId+1,
+                id: this.props.lastId + 1,
                 title: '',
                 questions: [],
                 progress: 0.00,
@@ -44,7 +44,7 @@ class NewDeck extends Component {
             const deck = this.state.newDeck;
 
             this.props.dispatch(actionSaveDeck(deck));
-            this.props.navigation.navigate('Home');
+            this.props.navigation.navigate('Deck', { deck });
         }
     }
 
