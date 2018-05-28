@@ -1,4 +1,4 @@
-import { GET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD, SAVE_DECK } from './action'
+import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD, SAVE_DECK } from './action'
 import { setInitialState } from '../../utils/setInitialState';
 import { setStateStorage } from '../../utils/api';
 
@@ -48,7 +48,7 @@ export default function decks(state = initialState, action) {
     console.log('decksMap: ' + JSON.stringify(decksMap));
 
     switch (action.type) {
-        case GET_DECKS:
+        case SET_DECKS:
             console.log('[REDUCER-DECKS] Getting Decks');
             debugger
             return {

@@ -15,12 +15,21 @@ import {
   Icon
 } from 'native-base';
 import { connect } from 'react-redux';
-import { actionLoading } from './action';
+import { actionLoading, actionSetDecks } from './action';
 import { getStateStorage } from '../../utils/api';
 import { getDecks } from './reducer';
 import Expo from "expo";
 
 class DeckList extends Component {
+  componentDidMount() {
+    getStateStorage()
+      .then((state) => {
+        console.log('componentDidMount getStateStorage')
+        this.props.dispatch(actionSetDecks(state.decks))
+        this.props.dispatch(actionLoading(!this.state.loading))
+      })
+  }
+
   onPress = (key) => {
     console.log('entrou list item click')
     this.props.navigation.navigate('Deck', { deck: key })
@@ -65,7 +74,8 @@ class DeckList extends Component {
 
 function mapStateToProps(state) {
   return {
-    decks: getDecks(state)
+    decks: getDecks(state),
+    loading: state.loading
   };
 }
 

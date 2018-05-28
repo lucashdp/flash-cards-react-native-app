@@ -35,8 +35,6 @@ export default class App extends React.Component {
     setInitialState()
       .then((decks) => {
         console.log('getDecks ' + JSON.stringify(decks));
-        if (decks !== undefined && decks !== null)
-          this.props.dispatch(actionSetDecks(decks))
       })
   }
 
