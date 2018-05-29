@@ -1,5 +1,4 @@
-import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD, SAVE_DECK } from './action'
-import { setInitialState } from '../../utils/setInitialState';
+import { SET_DECKS, LOADING, SET_ANSWER, START_QUIZ, SAVE_CARD, SAVE_DECK } from './action';
 import { setStateStorage } from '../../utils/api';
 
 const initialState =
@@ -152,7 +151,6 @@ function GetProgress(deck, progress) {
 }
 
 export function getDecks(state) {
-    debugger
     console.log('entrou mapStateToProps');
     console.log('state.decks: ' + JSON.stringify(state));
     const deckKeys = Object.keys(state.decks);

@@ -9,7 +9,7 @@ import { StackNavigator } from 'react-navigation';
 import Expo from "expo";
 import { StatusBar } from 'react-native';
 import { actionSetDecks, actionLoading } from './src/deck/action';
-import { setInitialState } from './utils/setInitialState';
+import { setNotification } from './utils/localNotification'
 
 const store = createStore(reducer);
 
@@ -30,12 +30,9 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    setNotification();
     StatusBar.setHidden(true);
     console.disableYellowBox = true;
-    setInitialState()
-      .then((decks) => {
-        console.log('getDecks ' + JSON.stringify(decks));
-      })
   }
 
   render() {

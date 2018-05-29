@@ -23,6 +23,8 @@ import {
 
 import { actionSetAnswer, actionLoading, actionStartQuiz } from '../deck/action';
 
+import { clearLocalNotification } from '../../utils/localNotification'
+
 class DeckCard extends Component {
     constructor(props) {
         console.log('DeckCard constructor');
@@ -36,6 +38,17 @@ class DeckCard extends Component {
 
     answer = (answer, question) => {
         this.setState({ showAnswer: false });
+        //to do: se ultima resp, limpar o notification
+
+        let number = 0;
+        this.props.deck.questions.forEach((question) => {
+            if (!question.answered)
+                number++;
+        });
+
+        if (number === 1)
+            clearLocalNotification();
+
         this.props.dispatch(actionSetAnswer(answer, this.props.deck, question));
         this.props.dispatch(actionLoading(!this.props.loading));
         // this._deckSwiper._root.swipeRight();
@@ -147,7 +160,7 @@ class DeckCard extends Component {
                         <CardItem cardBody>
                             <H1>CONGRATULATIONS !! YOU FINISHED !</H1>
                         </CardItem>
-                        
+
                         <CardItem>
                         </CardItem>
 
@@ -159,7 +172,7 @@ class DeckCard extends Component {
                                     <Text>Restart Quiz</Text>
                                 </Button>
                             </Body>
-                            <Right></Right>                            
+                            <Right></Right>
                         </CardItem>
                     </Card>
                 </View>
