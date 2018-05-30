@@ -26,6 +26,7 @@
 
 ### Quiz Page
 - On the quiz page you can see the question and think in a answer. So, you can see the answer througth 'Answer' button. After, you click in correct if you are right or incorrect if not.
+
 ![Quiz Page](https://raw.githubusercontent.com/lucashdp/flash-cards-react-native-app/master/utils/quiz.PNG)
 
 ## Pre-Requisites
