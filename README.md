@@ -6,23 +6,23 @@
 
 ### Initial Page
 - On the initial page you can see the list of decks.
-![Initial Page]()
+![Initial Page](https://raw.githubusercontent.com/lucashdp/flash-cards-react-native-app/master/utils/initialPage.PNG)
 
 ### New Deck Page
 - On the new deck page you can write the name of the deck and submit it.
-![New Deck Page]()
+![New Deck Page](https://raw.githubusercontent.com/lucashdp/flash-cards-react-native-app/master/utils/newDeck.PNG)
 
 ### Deck View Page
 - Once you create or click on a deck, you can see the actions and details of the deck.
-![Deck View Page]()
+![Deck View Page](https://raw.githubusercontent.com/lucashdp/flash-cards-react-native-app/master/utils/deckView.PNG)
 
 ### New Card Page
 - On the new card page you can write the question and answer of the card and submit it.
-![New Card Page]()
+![New Card Page](https://raw.githubusercontent.com/lucashdp/flash-cards-react-native-app/master/utils/newCard.PNG)
 
 ### Quiz Page
 - On the quiz page you can see the question and think in a answer. So, you can see the answer througth 'Answer' button. After, you click in correct if you are right or incorrect if not.
-![Quiz Page]()
+![Quiz Page](https://raw.githubusercontent.com/lucashdp/flash-cards-react-native-app/master/utils/quiz.PNG)
 
 ## Pre-Requisites
 
