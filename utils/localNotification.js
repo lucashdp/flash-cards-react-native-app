@@ -28,15 +28,12 @@ export function setNotification() {
     AsyncStorage.getItem(NOTIFICATION_STORAGE)
         .then(JSON.parse)
         .then((notification) => {
-            console.log('NOTIFICATION_STORAGE:' + JSON.stringify(notification));
             if (notification === null) {
-                console.log('entrou no setNotification');
                 Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
                     if (status !== 'granted') {
                         return;
                     }
 
-                    console.log('status == granted');
                     const notificationJson = JSON.parse(notification);
                     Notifications.cancelAllScheduledNotificationsAsync();
 

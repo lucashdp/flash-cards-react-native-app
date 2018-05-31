@@ -26,21 +26,15 @@ import { actionGetDecks, actionLoading, actionStartQuiz } from './action'
 class Deck extends Component {
 
   startQuiz = (deck) => {
-    console.log('entrou no start quiz')
-    console.log('deck: ' + JSON.stringify(deck))
     this.props.dispatch(actionStartQuiz(this.props.deck));
     this.props.navigation.navigate('DeckQuiz', { deck })
   }
 
   newCard = (deck) => {
-    console.log('entrou no new Card')
-    console.log('deck: ' + JSON.stringify(deck))
     this.props.navigation.navigate('NewCard', { deck })
   }
 
   render() {
-    console.log('[DECK] RENDER');
-    console.log('props: ' + JSON.stringify(this.props));
 
     return (
       <Container>

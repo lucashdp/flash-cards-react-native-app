@@ -24,14 +24,12 @@ class DeckList extends Component {
   componentDidMount() {
     getStateStorage()
       .then((state) => {
-        console.log('componentDidMount getStateStorage')
         this.props.dispatch(actionSetDecks(state.decks))
         this.props.dispatch(actionLoading(!this.state.loading))
       })
   }
 
   onPress = (key) => {
-    console.log('entrou list item click')
     this.props.navigation.navigate('Deck', { deck: key })
   }
 
@@ -49,11 +47,7 @@ class DeckList extends Component {
         </Header>
         <List>
           {
-            console.log('this.props.decks ' + JSON.stringify(this.props.decks))
-          }
-          {
             this.props.decks.map((key) => {
-              console.log('key ' + JSON.stringify(key))
               return (
                 <ListItem key={key.id} button={true}
                   onPress={() => { this.onPress(key) }}>

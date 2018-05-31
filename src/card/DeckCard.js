@@ -27,8 +27,6 @@ import { clearLocalNotification, setNotification } from '../../utils/localNotifi
 
 class DeckCard extends Component {
     constructor(props) {
-        console.log('DeckCard constructor');
-
         super(props)
 
         this.state = {
@@ -59,20 +57,16 @@ class DeckCard extends Component {
         this.props.dispatch(actionStartQuiz(this.props.deck));
         this.props.dispatch(actionLoading(!this.props.loading));
         this.props.deck.questions.filter((question) => {
-            console.log('question.answered: ' + JSON.stringify(question.answered));
             return (!question.answered)
         })
     }
 
     render() {
-        console.log('DeckCard');
         const showAnswer = this.state.showAnswer;
         const { deck } = this.props;
         const questions = this.props.deck.questions.filter((question) => {
-            console.log('question.answered: ' + JSON.stringify(question.answered));
             return (!question.answered)
         });
-        console.log('questions: ' + JSON.stringify(questions));
 
         if (questions != undefined && questions.length > 0) {
             return (

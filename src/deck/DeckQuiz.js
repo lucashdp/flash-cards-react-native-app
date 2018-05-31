@@ -26,8 +26,7 @@ import { getDecks } from './reducer';
 
 class DeckQuiz extends Component {
     render() {
-        console.log('DeckQuiz');
-        
+                
         return (
             <Container>
                 <Header>
