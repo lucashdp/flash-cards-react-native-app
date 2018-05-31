@@ -23,7 +23,7 @@ import {
 
 import { actionSetAnswer, actionLoading, actionStartQuiz } from '../deck/action';
 
-import { clearLocalNotification } from '../../utils/localNotification'
+import { clearLocalNotification, setNotification } from '../../utils/localNotification'
 
 class DeckCard extends Component {
     constructor(props) {
@@ -47,7 +47,8 @@ class DeckCard extends Component {
         });
 
         if (number === 1)
-            clearLocalNotification();
+            clearLocalNotification()
+                .then(setNotification());
 
         this.props.dispatch(actionSetAnswer(answer, this.props.deck, question));
         this.props.dispatch(actionLoading(!this.props.loading));

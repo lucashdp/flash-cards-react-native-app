@@ -9,7 +9,7 @@ import { StackNavigator } from 'react-navigation';
 import Expo from "expo";
 import { StatusBar } from 'react-native';
 import { actionSetDecks, actionLoading } from './src/deck/action';
-import { setNotification } from './utils/localNotification'
+import { setNotification } from './utils/localNotification';
 
 const store = createStore(reducer);
 
