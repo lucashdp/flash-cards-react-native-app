@@ -46,10 +46,17 @@ export default function decks(state = initialState, action) {
 
     switch (action.type) {
         case SET_DECKS:
-            debugger
+            let lastIdFromState = 0;
+
+            decks.forEach((deck) => {
+                if (deck.id > lastIdFromState)
+                    lastIdFromState = deck.id
+            });
+
             return {
                 ...state,
-                decks
+                decks,
+                lastId: lastIdFromState
             }
         case LOADING:
             return {
