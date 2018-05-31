@@ -159,7 +159,7 @@ class DeckCard extends Component {
                         </CardItem>
 
                         <CardItem cardBody>
-                            <H1>CONGRATULATIONS !! YOU FINISHED !</H1>
+                            <H1>CONGRATULATIONS !! YOU FINISHED WITH {this.props.deck.points} POINTS !</H1>
                         </CardItem>
 
                         <CardItem>
