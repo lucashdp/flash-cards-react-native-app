@@ -26,7 +26,7 @@ import { getDecks } from './reducer';
 
 class DeckQuiz extends Component {
     render() {
-                
+
         return (
             <Container>
                 <Header>
@@ -43,7 +43,7 @@ class DeckQuiz extends Component {
                     </Right>
                 </Header>
                 <View>
-                    <DeckCard deck={this.props.deck} loading={this.props.loading}/>
+                    <DeckCard deck={this.props.deck} loading={this.props.loading} navigation={this.props.navigation} />
                 </View>
             </Container>
         )
@@ -53,7 +53,7 @@ class DeckQuiz extends Component {
 function mapStateToProps(state, { navigation }) {
     return {
         decks: getDecks(state),
-        deck: navigation.state.params.deck,        
+        deck: navigation.state.params.deck,
         loading: state.loading
     }
 }

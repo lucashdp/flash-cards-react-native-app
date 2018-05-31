@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
+
 import {
     Container,
     Header,
@@ -23,7 +25,7 @@ import {
 
 import { actionSetAnswer, actionLoading, actionStartQuiz } from '../deck/action';
 
-import { clearLocalNotification, setNotification } from '../../utils/localNotification'
+import { clearLocalNotification, setNotification } from '../../utils/localNotification';
 
 class DeckCard extends Component {
     constructor(props) {
@@ -59,6 +61,10 @@ class DeckCard extends Component {
         this.props.deck.questions.filter((question) => {
             return (!question.answered)
         })
+    }
+
+    toDeck = () => {
+        this.props.navigation.navigate('Deck', { deck: this.props.deck });
     }
 
     render() {
@@ -160,14 +166,19 @@ class DeckCard extends Component {
                         </CardItem>
 
                         <CardItem>
-                            <Left></Left>
-                            <Body>
+                            <Left>
                                 <Button dark onPress={() => { this.restartQuiz() }}>
                                     <Icon type="MaterialCommunityIcons" name="restart" />
                                     <Text>Restart Quiz</Text>
                                 </Button>
-                            </Body>
-                            <Right></Right>
+                            </Left>
+                            <Body></Body>
+                            <Right>
+                                <Button primary onPress={() => { this.toDeck() }}>
+                                    <Icon type="Entypo" name="back" />
+                                    <Text>Back to Deck</Text>
+                                </Button>
+                            </Right>
                         </CardItem>
                     </Card>
                 </View>
